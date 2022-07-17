@@ -6,20 +6,19 @@ using RPG.Stats;
 
 namespace RPG.Attributes
 {
-    public class HealthDisplay : MonoBehaviour
+    public class StaminaDisplay : MonoBehaviour
     {
-        Health health;
+        Stamina stamina;
 
         private void Awake()
         {
-            health = GameObject.FindWithTag("Player").GetComponent<Health>();
+            stamina = GameObject.FindWithTag("Player").GetComponent<Stamina>();
         }
 
         private void Update()
         {
             //health.GetHealthPoints(),health.GetMaxHealthPoints());
-            GetComponent<Image>().fillAmount = health.GetHealthPoints()/health.GetMaxHealthPoints();
-            ;
+            GetComponent<Image>().fillAmount = stamina.GetStaminaValue()/stamina.GetMaxStaminaValue();
         }
     }
 

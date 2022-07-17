@@ -24,6 +24,7 @@ namespace RPG.Control
         Fighter fighter;
         GameObject player;
         Mover mover;
+        Stamina stamina;
 
         LazyValue<Vector3> guardLocation;
         int currentWaypointIndex = 0;
@@ -37,6 +38,7 @@ namespace RPG.Control
             health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player");
             mover = GetComponent<Mover>();
+            stamina = GetComponent<Stamina>();
 
             guardLocation = new LazyValue<Vector3>(GetGuardLocation);
         }
@@ -90,7 +92,7 @@ namespace RPG.Control
             }
             if(timeSinceArrivedAtWaypoint>dwellTime)
             {
-                mover.StartMoveAction(nextPosition,patrolSpeedFraction);
+                mover.StartMoveAction(nextPosition,patrolSpeedFraction,stamina.IsExhausted());
             }
             
         }

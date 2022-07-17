@@ -14,11 +14,13 @@ namespace RPG.Movement
         [SerializeField] float maxSpeed=6f;
 
         NavMeshAgent navMeshAgent;
+        Stamina stamina;
         Health health;
         private void Awake()
         {
             health = GetComponent<Health>();
             navMeshAgent = GetComponent<NavMeshAgent>();
+            stamina = GetComponent<Stamina>();
         }
         
 
@@ -28,11 +30,17 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
-        public void StartMoveAction(Vector3 desitnation, float speedFraction)
+        public void StartMoveAction(Vector3 desitnation, float speedFraction, bool isExhausted)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            
-            MoveTo(desitnation, speedFraction);
+            if (isExhausted)
+            {
+                MoveTo(desitnation, speedFraction*0.5f);
+            }
+            else
+            {
+                MoveTo(desitnation, speedFraction);
+            }
         }
         public void MoveTo(Vector3 destination,float speedFraction)
         {
@@ -44,6 +52,7 @@ namespace RPG.Movement
 
         public void Cancel()
         {
+            
             navMeshAgent.isStopped = true;
         }
 

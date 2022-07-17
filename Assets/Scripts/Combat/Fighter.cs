@@ -21,11 +21,16 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
 
+        [SerializeField] bool isPlayer = false;
         Health target;
+        Stamina stamina;
+        private Mana mana;
         float timeSinceLastAttack=Mathf.Infinity;
         private void Awake()
         {
             currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+            stamina = GetComponent<Stamina>();
+            mana = GetComponent<Mana>();
         }
 
         
@@ -61,13 +66,22 @@ namespace RPG.Combat
         }
         private void AttackBehaviour()
         {
+            
             transform.LookAt(target.transform);
-            if (timeSinceLastAttack > timeBetweenAttacks)
+            if (timeSinceLastAttack > timeBetweenAttacks &&stamina.GetStaminaValue()>=currentWeapon.value.GetStaminaCost()&&mana.GetManaValue()>=currentWeapon.value.GetManaCost())
             {
                 //This will trigger the Hit() event
                 TriggerAttack();
+               
                 timeSinceLastAttack = 0f;
-
+                stamina.UseStamina(currentWeapon.value.GetStaminaCost());
+                mana.UseMana(currentWeapon.value.GetManaCost());
+                
+            }
+            else
+            {
+                stamina.UpdateStamina();
+                mana.UpdateMana();
             }
         }
 
@@ -88,6 +102,7 @@ namespace RPG.Combat
             }
             else
             {
+               
                 target.TakeDamage(gameObject, damage);
             }
             

@@ -57,4 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f651079f0586e654781ba2dc4367f950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hotBar: {fileID: 0}
   weapon: {fileID: 11400000, guid: 6fb77a2ced310c8478c30fe29788e2f9, type: 2}
+  respawnTime: 5
+  pickUpType: 6

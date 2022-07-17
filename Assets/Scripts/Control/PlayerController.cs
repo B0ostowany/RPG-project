@@ -14,6 +14,7 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
         Health health;
+        Stamina stamina;
 
         enum CursorType
         {
@@ -34,6 +35,7 @@ namespace RPG.Control
         private void Awake()
         {
             health = GetComponent<Health>();
+            stamina = GetComponent<Stamina>();
         }
 
         private void Update()
@@ -115,7 +117,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                     {
-                    GetComponent<Mover>().StartMoveAction(hit.point,1f);
+                    GetComponent<Mover>().StartMoveAction(hit.point,1f,stamina.IsExhausted());
                     }
                 SetCursor(CursorType.Movement);
                 return true;

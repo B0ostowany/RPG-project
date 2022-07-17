@@ -1,20 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.UI;
 using UnityEngine;
 
 namespace RPG.Combat
 {
     public class WeaponPickup : MonoBehaviour
     {
+        [SerializeField] public InventoryHotBar hotBar;
         [SerializeField] Weapon weapon = null;
         [SerializeField] float respawnTime=5f;
+        [SerializeField] private PickUp pickUpType;
+        
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.tag=="Player")
             {
+                
                 other.GetComponent<Fighter>().EquipWeapon(weapon);
                 StartCoroutine(HideForSeconds(respawnTime));
+                hotBar.AddWeaponToHotbar(pickUpType);
             }
         }
 

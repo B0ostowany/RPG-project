@@ -19,3 +19,5 @@ MonoBehaviour:
   percentageBonus: 10
   isRightHanded: 0
   projectile: {fileID: 7454741867305463010, guid: f0e1772e00170024f8b0da3d1ff7dfa7, type: 3}
+  staminaCost: 0
+  manaCost: 0
