@@ -1,3 +1,4 @@
+using RPG.Attributes;
 using RPG.Combat;
 using UnityEngine;
 
@@ -19,8 +20,9 @@ namespace RPG.UI
         public PickUp pickUp;
         public bool isEquipped;
         public Weapon weapon;
-        public bool isWeapon;
-        public int slot;
+        public Potion potion;
+        public int usesLeft;
+        public Health health;
     }
 
 }

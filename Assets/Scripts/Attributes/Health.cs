@@ -45,6 +45,11 @@ namespace RPG.Attributes
             float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * (regenPercentage/100);
             healthPoints.value = Mathf.Max(healthPoints.value, regenHealthPoints);
         }
+        
+        public void PotionHealthRegen(int regenHealthPoints)
+        {
+            healthPoints.value += regenHealthPoints;
+        }
 
         public bool IsDead()
         {
