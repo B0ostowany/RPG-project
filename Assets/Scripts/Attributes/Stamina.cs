@@ -63,6 +63,10 @@ namespace RPG.Attributes
         {
             return staminaPoints.value / GetInitialStamina();
         }
+        public void PotionStaminaRegen(int regenAmount)
+        {
+            staminaPoints.value += regenAmount;
+        }
         // Update is called once per frame
         void Update()
         {

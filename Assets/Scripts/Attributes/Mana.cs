@@ -74,6 +74,10 @@ namespace RPG.Attributes
             }
             
         }
+        public void PotionManaRegen(int regenManaPoints)
+        {
+            manaPoints.value += regenManaPoints;
+        }
 
         private float GetInitialMana()
         {

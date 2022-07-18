@@ -28,6 +28,8 @@ namespace RPG.Combat
             info.pickUp = pickUpType;
             info.potion = potion;
             info.health = other.GetComponent<Health>();
+            info.mana = other.GetComponent<Mana>();
+            info.stamina = other.GetComponent<Stamina>();
             StartCoroutine(HideForSeconds(respawnTime));
             hotBar.AddWeaponToHotbar(info);
             

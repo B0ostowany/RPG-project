@@ -23,6 +23,8 @@ namespace RPG.UI
         public Potion potion;
         public int usesLeft;
         public Health health;
+        public Mana mana;
+        public Stamina stamina;
     }
 
 }
