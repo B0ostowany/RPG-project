@@ -45,6 +45,7 @@ namespace RPG.Combat
 
         private void Update()
         {
+            
             timeSinceLastAttack += Time.deltaTime;
             if (target == null) return;
             if (target.IsDead()) return;
@@ -174,6 +175,8 @@ namespace RPG.Combat
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
+
+        
 
         public object CaptureState()
         {

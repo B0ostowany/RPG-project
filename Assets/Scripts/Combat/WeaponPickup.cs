@@ -12,16 +12,25 @@ namespace RPG.Combat
         [SerializeField] Weapon weapon = null;
         [SerializeField] float respawnTime=5f;
         [SerializeField] private PickUp pickUpType;
-        
+        private PickUpInfo info;
+
+        private void Start()
+        {
+            info = new PickUpInfo();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.tag=="Player")
-            {
-                
-                other.GetComponent<Fighter>().EquipWeapon(weapon);
-                StartCoroutine(HideForSeconds(respawnTime));
-                hotBar.AddWeaponToHotbar(pickUpType);
-            }
+            if (other.gameObject.tag != "Player"||info.isEquipped) return;
+            
+            info.isEquipped = true;
+            info.pickUp = pickUpType;
+            info.weapon = weapon;
+            info.isWeapon = true;
+            other.GetComponent<Fighter>().EquipWeapon(weapon);
+            StartCoroutine(HideForSeconds(respawnTime));
+            hotBar.AddWeaponToHotbar(info);
+            
         }
 
         private IEnumerator HideForSeconds(float seconds)

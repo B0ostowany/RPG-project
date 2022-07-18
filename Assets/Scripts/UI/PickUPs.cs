@@ -1,3 +1,6 @@
+using RPG.Combat;
+using UnityEngine;
+
 namespace RPG.UI
 {
     public enum PickUp
@@ -9,6 +12,15 @@ namespace RPG.UI
         HealthPotion,
         StaminaPotion,
         Unarmed
+    }
+    
+    public struct PickUpInfo
+    {
+        public PickUp pickUp;
+        public bool isEquipped;
+        public Weapon weapon;
+        public bool isWeapon;
+        public int slot;
     }
 
 }
