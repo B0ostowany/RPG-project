@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27377ea6e2b13604f8f94fda00977b51, type: 3}
-  m_Name: Weapon
+  m_Name: Club
   m_EditorClassIdentifier: 
-  animatorOverride: {fileID: 0}
-  equippedPrefab: {fileID: 0}
-  weaponRange: 2
-  weaponDamage: 5
+  animatorOverride: {fileID: 22100000, guid: 4a35603c2eae34241991bc6020b3acb6, type: 2}
+  equippedPrefab: {fileID: 7693640432813412105, guid: 8de3a4490d8631e458ea352b3f2a710c, type: 3}
+  weaponRange: 3
+  weaponDamage: 15
   percentageBonus: 0
-  isRightHanded: 1
+  isRightHanded: 0
   projectile: {fileID: 0}
-  staminaCost: 0
+  staminaCost: 25
+  manaCost: 0

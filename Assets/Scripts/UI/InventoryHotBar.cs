@@ -16,14 +16,16 @@ namespace RPG.UI
 {
     public class InventoryHotBar : MonoBehaviour
     {
+        private bool isPaused = false;
         [SerializeField] private List<Sprite> pickUpImages;
         [SerializeField] private List<Image> slotImages;
         private PickUpInfo[] pickedPickUps;
         [SerializeField] private Fighter playerFighter;
         int slotIndex = 0;
+        [SerializeField] private GameObject exitButton;
         public void AddWeaponToHotbar(PickUpInfo pickup)
         {   
-            if(slotIndex<6 &&!slotImages[slotIndex].isActiveAndEnabled)
+            if(slotIndex<7 &&!slotImages[slotIndex].isActiveAndEnabled)
             {
                 pickedPickUps[slotIndex]=pickup;
                 switch(pickup.pickUp)
@@ -52,6 +54,10 @@ namespace RPG.UI
                         slotImages[slotIndex].enabled = true;
                         slotImages[slotIndex].sprite = pickUpImages[5];
                         break;
+                    case PickUp.Club:
+                        slotImages[slotIndex].enabled = true;
+                        slotImages[slotIndex].sprite = pickUpImages[6];
+                        break;
                 }
                 
                 
@@ -62,7 +68,7 @@ namespace RPG.UI
 
         private void Start()
         {
-            pickedPickUps = new PickUpInfo[6];
+            pickedPickUps = new PickUpInfo[7];
         }
 
         private void Update()
@@ -190,6 +196,37 @@ namespace RPG.UI
                     pickedPickUps[5].usesLeft--;
                 }
             }
+            if (Input.GetKeyDown(KeyCode.M)&&pickedPickUps[6].isEquipped&&pickedPickUps[6].usesLeft==-1)
+            {
+                playerFighter.EquipWeapon(pickedPickUps[6].weapon);
+            }else if(Input.GetKeyDown(KeyCode.M)&&pickedPickUps[6].isEquipped&&pickedPickUps[6].usesLeft>0)
+            {
+                if (pickedPickUps[6].pickUp == PickUp.HealthPotion)
+                {
+                    Debug.Log("You can't use this weapon, it's health potion");
+                    pickedPickUps[6].health.PotionHealthRegen(pickedPickUps[6].potion.GetRegenAmount());
+                    pickedPickUps[6].usesLeft--;
+                }else if (pickedPickUps[6].pickUp == PickUp.ManaPotion)
+                {
+                    pickedPickUps[6].mana.PotionManaRegen(pickedPickUps[6].potion.GetRegenAmount());
+                    pickedPickUps[6].usesLeft--;
+                }else if (pickedPickUps[6].pickUp == PickUp.StaminaPotion)
+                {
+                    pickedPickUps[6].stamina.PotionStaminaRegen(pickedPickUps[6].potion.GetRegenAmount());
+                    pickedPickUps[6].usesLeft--;
+                }
+            }
+            
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                isPaused = !isPaused;
+                exitButton.SetActive(isPaused);
+            }
+            
+        }
+        public void ExitGame()
+        {
+            Application.Quit();
         }
     }   
 }

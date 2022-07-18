@@ -12,6 +12,7 @@ namespace RPG.UI
         ManaPotion,
         HealthPotion,
         StaminaPotion,
+        Club,
         Unarmed
     }
     
